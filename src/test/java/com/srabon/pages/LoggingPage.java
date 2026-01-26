@@ -32,6 +32,6 @@ public class LoggingPage {
         return new HomePage(driver);
     }
 
-    verifyProductsAreVisible();
+    //verifyProductsAreVisible();
 
 }
