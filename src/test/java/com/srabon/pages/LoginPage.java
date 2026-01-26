@@ -3,13 +3,15 @@ package com.srabon.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoggingPage {
+public class LoginPage {
     private WebDriver driver;
     private By userNameField= By.id("user-name");
     private By passwordField= By.id("password");
     private By loginButton = By.id("login-button");
+    private By errorMessage  = By.cssSelector("[data-test='error']");
 
-    public LoggingPage(WebDriver driver){
+
+    public LoginPage(WebDriver driver){
         this.driver=driver;
     }
 
@@ -32,6 +34,8 @@ public class LoggingPage {
         return new HomePage(driver);
     }
 
-    //verifyProductsAreVisible();
+    public boolean isErrorDisplayed() {
+        return driver.findElements(errorMessage).size() > 0;
+    }
 
 }

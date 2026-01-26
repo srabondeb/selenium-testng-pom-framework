@@ -11,18 +11,18 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 0)
     public void validUserLogin(){
-        HomePage homePage = logingIntoPage.logIn("standard_user", "secret_sauce");
+        HomePage homePage = loginPage.logIn("standard_user", "secret_sauce");
 
         Assert.assertTrue(
-                driver.getCurrentUrl().contains("inventory"),"Login failed: inventory page is not loaded");
+                homePage.isOnInventoryPage(),"error: inventory Page is not loaded"
+        );
     }
 
-
-    @Test(priority = 1, dependsOnMethods = "validUserLogin")
+    @Test(priority = 1)
     public void productAreVisibleAfterLogin(){
-        HomePage homePage =logingIntoPage.logIn("standard_user", "secret_sauce");
+        HomePage homePage =loginPage.logIn("standard_user", "secret_sauce");
+
     Assert.assertTrue(
-           // driver.findElement(By.className("inventory_item")).size()>0
             homePage.productsAreVisible(), "Products are Not visible after login"
     );
 
@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 2)
     public void invalidUserLogin(){
-        logingIntoPage.logIn("wrong_user", "wrong_password");
+        loginPage.logIn("wrong_user", "wrong_password");
 
         Assert.assertFalse(
         driver.getCurrentUrl().contains("inventory"),
