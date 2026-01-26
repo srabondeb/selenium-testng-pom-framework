@@ -25,10 +25,13 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    public void login(String userName, String password){
+    public HomePage login(String userName, String password){
         enterUserName(userName);
         enterPassword(password);
         clickLogin();
+        return new HomePage(driver);
     }
+
+
 
 }
