@@ -3,13 +3,13 @@ package com.srabon.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+public class LoggingPage {
     private WebDriver driver;
     private By userNameField= By.id("user-name");
     private By passwordField= By.id("password");
     private By loginButton = By.id("login-button");
 
-    public LoginPage(WebDriver driver){
+    public LoggingPage(WebDriver driver){
         this.driver=driver;
     }
 
@@ -25,13 +25,13 @@ public class LoginPage {
         driver.findElement(loginButton).click();
     }
 
-    public HomePage login(String userName, String password){
+    public HomePage logIn(String userName, String password){
         enterUserName(userName);
         enterPassword(password);
         clickLogin();
         return new HomePage(driver);
     }
 
-
+    verifyProductsAreVisible();
 
 }

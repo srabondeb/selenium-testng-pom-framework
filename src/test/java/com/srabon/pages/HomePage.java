@@ -11,9 +11,7 @@ public class HomePage {
         this.driver = driver;
     }
 
-
-
-    public boolean homePageDisplayed() {
+    public boolean verifyHomePageIsDisplayed() {
         return driver.getCurrentUrl().contains("inventory");
     }
 

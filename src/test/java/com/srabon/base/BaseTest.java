@@ -1,7 +1,6 @@
 package com.srabon.base;
 
-import com.srabon.pages.HomePage;
-import com.srabon.pages.LoginPage;
+import com.srabon.pages.LoggingPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -11,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 public class BaseTest {
 
     protected WebDriver driver;
-    protected LoginPage loginPage;
+    protected LoggingPage logingIntoPage;
 
 
     @BeforeMethod
@@ -20,8 +19,8 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get("https://www.saucedemo.com/");
 
-        loginPage = new LoginPage(driver);
-        homePage  = new HomePage(driver);
+        //because login page is only valid after p
+        logingIntoPage=new LoggingPage(driver);
     }
 
     @AfterClass
