@@ -1,10 +1,10 @@
 package com.srabon.tests;
 
 import com.srabon.base.BaseTest;
-import com.srabon.pages.HomePage;
+import com.srabon.pages.LoginPage;
+import com.srabon.pages.ProductsPage;
 import org.testng.annotations.DataProvider;
 
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -29,7 +29,7 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 0)
     public void validUserLogin(){
-        HomePage homePage = loginPage.logIn("standard_user", "secret_sauce");
+        ProductsPage homePage = loginPage.logIn("standard_user", "secret_sauce");
 
         Assert.assertTrue(
                 homePage.isOnInventoryPage(),"error: inventory Page is not loaded"
@@ -38,12 +38,20 @@ public class LoginTest extends BaseTest {
 
     @Test(priority = 1)
     public void productAreVisibleAfterLogin(){
-        HomePage homePage =loginPage.logIn("standard_user", "secret_sauce");
+        ProductsPage homePage =loginPage.logIn("standard_user", "secret_sauce");
 
     Assert.assertTrue(
             homePage.productsAreVisible(), "Products are Not visible after login"
     );
 
+    }
+
+    @Test(priority = 2)
+    public void userCanLogout() {
+        ProductsPage productsPage = loginPage.logIn("standard_user", "secret_sauce");
+        LoginPage loginPageAfterLogout = productsPage.logout();
+        Assert.assertTrue(loginPageAfterLogout.isLoginButtonDisplayed(),
+                "Login button should be visible after logout");
     }
 
 

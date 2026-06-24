@@ -34,11 +34,11 @@ public class LoginPage {
 
     }
 
-    public HomePage logIn(String userName, String password){
+    public ProductsPage logIn(String userName, String password){
         enterUserName(userName);
         enterPassword(password);
         clickLogin();
-        return new HomePage(driver,wait);
+        return new ProductsPage(driver,wait);
     }
 
     public boolean isErrorDisplayed() {
@@ -47,6 +47,9 @@ public class LoginPage {
 
     public String getErrorMessage() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();
+    }
+    public boolean isLoginButtonDisplayed() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton)).isDisplayed();
     }
 
 }
