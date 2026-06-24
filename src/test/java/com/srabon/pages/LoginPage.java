@@ -45,4 +45,8 @@ public class LoginPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).isDisplayed();
     }
 
+    public String getErrorMessage() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorMessage)).getText();
+    }
+
 }

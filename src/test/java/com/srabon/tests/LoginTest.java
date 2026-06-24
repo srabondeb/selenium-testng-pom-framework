@@ -2,12 +2,30 @@ package com.srabon.tests;
 
 import com.srabon.base.BaseTest;
 import com.srabon.pages.HomePage;
+import org.testng.annotations.DataProvider;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
+
+    @DataProvider(name = "invalidLogins")
+    public Object[][] invalidLogins() {
+        return new Object[][] {
+                {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
+                {"standard_user", "wrong_password", "Epic sadface: Username and password do not match any user in this service"},
+                {"", "secret_sauce", "Epic sadface: Username is required"},
+                {"standard_user", "", "Epic sadface: Password is required"}
+        };
+    }
+
+    @Test(dataProvider = "invalidLogins")
+    public void invalidLoginShowsError(String username, String password, String expectedError) {
+        loginPage.logIn(username, password);
+        Assert.assertEquals(loginPage.getErrorMessage(), expectedError,
+                "Wrong error message for username: " + username);
+    }
 
     @Test(priority = 0)
     public void validUserLogin(){
@@ -28,19 +46,5 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test(priority = 2)
-    public void invalidUserLogin(){
-        loginPage.logIn("wrong_user", "wrong_password");
-
-        Assert.assertFalse(
-        driver.getCurrentUrl().contains("inventory"),
-                "User should remain on login page after invalid login"
-    );
-        Assert.assertTrue(
-                loginPage.isErrorDisplayed(),
-                "Error message should be displayed for invalid login"
-        );
-
-    }
 
 }
