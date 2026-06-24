@@ -21,6 +21,7 @@ public class CheckoutPage {
         this.wait = wait;
     }
     public void enterCustomerInfo(String first, String last, String zip) {
+        System.out.println("CURRENT URL: " + driver.getCurrentUrl());
         wait.until(ExpectedConditions.visibilityOfElementLocated(firstName)).sendKeys(first);
         wait.until(ExpectedConditions.visibilityOfElementLocated(lastName)).sendKeys(last);
         wait.until(ExpectedConditions.visibilityOfElementLocated(postalCode)).sendKeys(zip);
