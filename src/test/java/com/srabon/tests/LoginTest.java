@@ -37,7 +37,7 @@ public class LoginTest extends BaseTest {
                 "User should remain on login page after invalid login"
     );
         Assert.assertTrue(
-                driver.findElement(By.cssSelector("[data-test='error']")).isDisplayed(),
+                loginPage.isErrorDisplayed(),
                 "Error message should be displayed for invalid login"
         );
 
